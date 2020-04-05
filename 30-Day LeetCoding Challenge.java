@@ -40,3 +40,34 @@ class Solution {
 		return true;
 	}
 }
+
+/* Maximum Subarray */
+
+// The array may has no positive interger
+class Solution {
+    public int maxSubArray(int[] nums)
+	{
+		int sum = nums[0];
+		int i = 0;
+		for (i = 0; i < nums.length; i++)
+		{
+			if (nums[i] < 0 && nums[i] > sum)
+				sum = nums[i];
+			else if (nums[i] >= 0)
+			{
+				sum = nums[i];
+				int tmp = nums[i];
+				for (int j = i + 1; j < nums.length; j++)
+				{
+					tmp += nums[j];
+					if (tmp > sum)
+						sum = tmp;
+					else if (tmp < 0)
+						tmp = 0;
+				}
+				return sum;
+			}
+		}
+		return sum;
+	}
+}
