@@ -71,3 +71,25 @@ class Solution {
 		return sum;
 	}
 }
+
+/* Move Zeroes */
+
+// Just go through the array, put the number in its position
+class Solution {
+    public void moveZeroes(int[] nums)
+	{
+		int flag = 0;
+		for (int i = 0; i < nums.length; i++)
+		{
+			if (nums[i] != 0)
+			{
+				nums[flag] = nums[i];
+				flag++;
+			}
+		}
+		for (int j = flag; j < nums.length; j++)
+		{
+			nums[j] = 0;
+		}
+	}
+}
