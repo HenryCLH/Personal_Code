@@ -110,3 +110,34 @@ class Solution {
 		return profit;
 	}
 }
+
+/* Group Anagrams */
+
+// Sort every string to group anagrams, use the sorted string as the key of the hash map
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs)
+	{
+		List<List<String>> group = new ArrayList<List<String>>();
+		Map<String, List<String>> map = new HashMap<String, List<String>>();
+		for (String s : strs)
+		{
+			char[] chs = s.toCharArray();
+			Arrays.sort(chs);
+			String tmps = new String(chs);
+			List<String> list = map.get(tmps);
+			if (list == null)
+			{
+				list = new ArrayList<String>();
+				list.add(s);
+				map.put(tmps, list);
+			}
+			else
+				list.add(s);
+		}
+		for (List<String> l : map.values())
+		{
+			group.add(l);
+		}
+		return group;
+	}
+}
