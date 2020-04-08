@@ -141,3 +141,49 @@ class Solution {
 		return group;
 	}
 }
+
+/* Counting Elements */
+
+// Because of the constraints, we can use simple array to record
+class Solution {
+    public int countElements(int[] arr)
+	{
+		int[] flag = new int[1002];
+		int count = 0;
+		for (int i : arr)
+		{
+			flag[i + 1]++;
+		}
+		for (int j : arr)
+		{
+			if (flag[j] != 0)
+			{
+				count += flag[j];
+				flag[j] = 0;
+			}
+		}
+		return count;
+	}
+}
+
+/*************
+	Week 1
+*************/
+
+/* Middle of the Linked List */
+
+// Use differential step
+class Solution {
+    public ListNode middleNode(ListNode head) {
+		ListNode ans = head;
+		boolean flag = true;
+		while(head.next != null)
+		{
+			head = head.next;
+			if(flag)
+				ans = ans.next;
+			flag = !flag;
+		}
+        return ans;
+    }
+}
