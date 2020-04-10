@@ -167,7 +167,7 @@ class Solution {
 }
 
 /*************
-	Week 1
+	Week 2
 *************/
 
 /* Middle of the Linked List */
@@ -186,4 +186,61 @@ class Solution {
 		}
         return ans;
     }
+}
+
+/* Backspace String Compare */
+
+// From back to front check the equivalence, every time check one character
+class Solution {
+    public boolean backspaceCompare(String S, String T)
+	{
+		boolean b = true;
+		int indexS = S.length() - 1, indexT = T.length() - 1;
+		while (indexS >= 0 || indexT >= 0)
+		{
+			char chS = '#';
+			int countS = 0;
+			if (indexS >= 0)
+			{
+				chS = S.charAt(indexS--);
+				while (chS == '#' || countS > 0)
+				{
+					if (chS == '#')
+						countS++;
+					else
+						countS--;
+					if (indexS < 0)
+					{
+						chS = '#';
+						break;
+					}
+					else
+						chS = S.charAt(indexS--);
+				}
+			}
+			char chT = '#';
+			int countT = 0;
+			if (indexT >= 0)
+			{
+				chT = T.charAt(indexT--);
+				while (chT == '#' || countT > 0)
+				{
+					if (chT == '#')
+						countT++;
+					else
+						countT--;
+					if (indexT < 0)
+					{
+						chT = '#';
+						break;
+					}
+					else
+						chT = T.charAt(indexT--);
+				}
+			}
+			if (chS != chT)
+				return false;
+		}
+		return b;
+	}
 }
