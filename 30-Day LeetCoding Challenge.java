@@ -244,3 +244,41 @@ class Solution {
 		return b;
 	}
 }
+
+/* Min Stack */
+
+// Every element has a min value record
+class MinStack
+{
+	private Stack<Integer[]> data;
+	private int min;
+
+	public MinStack()
+	{
+		data = new Stack<Integer[]>();
+		min = Integer.MAX_VALUE;
+	}
+
+	public void push(int x)
+	{
+		if (x < min)
+			min = x;
+		Integer[] tmp = { x, min };
+		data.add(tmp);
+	}
+
+	public void pop()
+	{
+		data.pop();
+		if (data.size() == 0)
+			min = Integer.MAX_VALUE;
+		else
+			min = data.lastElement()[1];
+	}
+
+	public int top()
+	{ return data.lastElement()[0]; }
+
+	public int getMin()
+	{ return data.lastElement()[1]; }
+}
