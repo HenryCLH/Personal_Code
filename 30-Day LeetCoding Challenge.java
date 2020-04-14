@@ -282,3 +282,31 @@ class MinStack
 	public int getMin()
 	{ return data.lastElement()[1]; }
 }
+
+/* Diameter of Binary Tree */
+
+// Every path can be apart into two parts on the highest node of the path,
+// so for every node, calculate the longest part of left an right,
+// and return to its father node the longer part + 1,
+// calculate the left + right which is the longest path go through this node,
+// and after run for all nodes, we have the longest path value
+class Solution {
+    private int max = 0;
+
+	public int diameterOfBinaryTree(TreeNode root)
+	{
+		if (root != null)
+			maxPath(root);
+		return max;
+	}
+	
+	public int maxPath(TreeNode node)
+	{
+		int tmpLeft = (node.left == null) ? 0 : (maxPath(node.left) + 1);
+		int tmpRight = (node.right == null) ? 0 : (maxPath(node.right) + 1);
+		int tmp = tmpLeft + tmpRight;
+		if(tmp > max)
+			max = tmp;
+		return Math.max(tmpLeft, tmpRight);
+	}
+}
