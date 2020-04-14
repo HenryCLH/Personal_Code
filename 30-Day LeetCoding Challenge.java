@@ -5,8 +5,10 @@
 /* Single Number */
 
 // Use XOR
-class Solution {
-    public int singleNumber(int[] nums) {
+class Solution
+{
+    public int singleNumber(int[] nums)
+    {
         int single = 0;
 		for (int i : nums)
 		{
@@ -19,7 +21,8 @@ class Solution {
 /* Happy Number */
 
 // Brute Calculate
-class Solution {
+class Solution
+{
     public boolean isHappy(int n)
 	{
 		int[] tmp = new int[730];
@@ -44,7 +47,8 @@ class Solution {
 /* Maximum Subarray */
 
 // The array may has no positive interger
-class Solution {
+class Solution
+{
     public int maxSubArray(int[] nums)
 	{
 		int sum = nums[0];
@@ -75,7 +79,8 @@ class Solution {
 /* Move Zeroes */
 
 // Just go through the array, put the number in its position
-class Solution {
+class Solution
+{
     public void moveZeroes(int[] nums)
 	{
 		int flag = 0;
@@ -97,7 +102,8 @@ class Solution {
 /* Best Time to Buy and Sell Stock II */
 
 // Calculate profit between every two days and add up the positve profits
-class Solution {
+class Solution
+{
     public int maxProfit(int[] prices)
 	{
 		int profit = 0;
@@ -114,7 +120,8 @@ class Solution {
 /* Group Anagrams */
 
 // Sort every string to group anagrams, use the sorted string as the key of the hash map
-class Solution {
+class Solution
+{
     public List<List<String>> groupAnagrams(String[] strs)
 	{
 		List<List<String>> group = new ArrayList<List<String>>();
@@ -145,7 +152,8 @@ class Solution {
 /* Counting Elements */
 
 // Because of the constraints, we can use simple array to record
-class Solution {
+class Solution
+{
     public int countElements(int[] arr)
 	{
 		int[] flag = new int[1002];
@@ -173,7 +181,8 @@ class Solution {
 /* Middle of the Linked List */
 
 // Use differential step
-class Solution {
+class Solution
+{
     public ListNode middleNode(ListNode head) {
 		ListNode ans = head;
 		boolean flag = true;
@@ -191,7 +200,8 @@ class Solution {
 /* Backspace String Compare */
 
 // From back to front check the equivalence, every time check one character
-class Solution {
+class Solution
+{
     public boolean backspaceCompare(String S, String T)
 	{
 		boolean b = true;
@@ -290,7 +300,8 @@ class MinStack
 // and return to its father node the longer part + 1,
 // calculate the left + right which is the longest path go through this node,
 // and after run for all nodes, we have the longest path value
-class Solution {
+class Solution
+{
     private int max = 0;
 
 	public int diameterOfBinaryTree(TreeNode root)
@@ -308,5 +319,33 @@ class Solution {
 		if(tmp > max)
 			max = tmp;
 		return Math.max(tmpLeft, tmpRight);
+	}
+}
+
+/* Last Stone Weight */
+
+// Sort and find the two heaviest stones
+class Solution
+{
+    public int lastStoneWeight(int[] stones)
+	{
+		int length = stones.length;
+		if (length == 0)
+			return 0;
+		else if (length == 1)
+			return stones[0];
+		else
+		{
+			Arrays.sort(stones);
+			while (stones[length - 2] != 0)
+			{
+				int x = stones[length - 1];
+				int y = stones[length - 2];
+				stones[length - 1] = Math.abs(x - y);
+				stones[length - 2] = 0;
+				Arrays.sort(stones);
+			}
+			return stones[length - 1];
+		}
 	}
 }
