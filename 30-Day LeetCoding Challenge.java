@@ -371,3 +371,27 @@ class Solution
 		return 0;
 	}
 }
+
+/* Perform String Shifts */
+// Suppose we have a window slide on the string,
+// then we can decide the final string based on the window position
+class Solution
+{
+	public String stringShift(String s, int[][] shift)
+	{
+		int length = s.length(), index = 0;
+		for (int[] ii : shift)
+		{
+			if (ii[0] == 0)
+				index += ii[1];
+			else
+				index -= ii[1];
+		}
+		if (index < 0)
+			index += (Math.abs(index) / length + 1) * length;
+		else if (index >= length)
+			index -= (index / length) * length;
+		s += s;
+		return s.substring(index, index + length);
+	}
+}
