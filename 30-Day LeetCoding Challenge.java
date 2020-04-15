@@ -3,27 +3,25 @@
 *************/
 
 /* Single Number */
-
 // Use XOR
 class Solution
 {
-    public int singleNumber(int[] nums)
-    {
-        int single = 0;
+	public int singleNumber(int[] nums)
+	{
+		int single = 0;
 		for (int i : nums)
 		{
 			single = single ^ i;
 		}
 		return single;
-    }
+	}
 }
 
 /* Happy Number */
-
 // Brute Calculate
 class Solution
 {
-    public boolean isHappy(int n)
+	public boolean isHappy(int n)
 	{
 		int[] tmp = new int[730];
 		while (n != 1)
@@ -45,11 +43,10 @@ class Solution
 }
 
 /* Maximum Subarray */
-
 // The array may has no positive interger
 class Solution
 {
-    public int maxSubArray(int[] nums)
+	public int maxSubArray(int[] nums)
 	{
 		int sum = nums[0];
 		int i = 0;
@@ -77,11 +74,10 @@ class Solution
 }
 
 /* Move Zeroes */
-
 // Just go through the array, put the number in its position
 class Solution
 {
-    public void moveZeroes(int[] nums)
+	public void moveZeroes(int[] nums)
 	{
 		int flag = 0;
 		for (int i = 0; i < nums.length; i++)
@@ -100,11 +96,10 @@ class Solution
 }
 
 /* Best Time to Buy and Sell Stock II */
-
 // Calculate profit between every two days and add up the positve profits
 class Solution
 {
-    public int maxProfit(int[] prices)
+	public int maxProfit(int[] prices)
 	{
 		int profit = 0;
 		for (int i = 0; i < prices.length - 1; i++)
@@ -118,11 +113,10 @@ class Solution
 }
 
 /* Group Anagrams */
-
 // Sort every string to group anagrams, use the sorted string as the key of the hash map
 class Solution
 {
-    public List<List<String>> groupAnagrams(String[] strs)
+	public List<List<String>> groupAnagrams(String[] strs)
 	{
 		List<List<String>> group = new ArrayList<List<String>>();
 		Map<String, List<String>> map = new HashMap<String, List<String>>();
@@ -150,11 +144,10 @@ class Solution
 }
 
 /* Counting Elements */
-
 // Because of the constraints, we can use simple array to record
 class Solution
 {
-    public int countElements(int[] arr)
+	public int countElements(int[] arr)
 	{
 		int[] flag = new int[1002];
 		int count = 0;
@@ -179,11 +172,10 @@ class Solution
 *************/
 
 /* Middle of the Linked List */
-
 // Use differential step
 class Solution
 {
-    public ListNode middleNode(ListNode head) {
+	public ListNode middleNode(ListNode head) {
 		ListNode ans = head;
 		boolean flag = true;
 		while(head.next != null)
@@ -193,16 +185,15 @@ class Solution
 				ans = ans.next;
 			flag = !flag;
 		}
-        return ans;
-    }
+		return ans;
+	}
 }
 
 /* Backspace String Compare */
-
 // From back to front check the equivalence, every time check one character
 class Solution
 {
-    public boolean backspaceCompare(String S, String T)
+	public boolean backspaceCompare(String S, String T)
 	{
 		boolean b = true;
 		int indexS = S.length() - 1, indexT = T.length() - 1;
@@ -256,7 +247,6 @@ class Solution
 }
 
 /* Min Stack */
-
 // Every element has a min value record
 class MinStack
 {
@@ -294,7 +284,6 @@ class MinStack
 }
 
 /* Diameter of Binary Tree */
-
 // Every path can be apart into two parts on the highest node of the path,
 // so for every node, calculate the longest part of left an right,
 // and return to its father node the longer part + 1,
@@ -302,7 +291,7 @@ class MinStack
 // and after run for all nodes, we have the longest path value
 class Solution
 {
-    private int max = 0;
+	private int max = 0;
 
 	public int diameterOfBinaryTree(TreeNode root)
 	{
@@ -323,11 +312,10 @@ class Solution
 }
 
 /* Last Stone Weight */
-
 // Sort and find the two heaviest stones
 class Solution
 {
-    public int lastStoneWeight(int[] stones)
+	public int lastStoneWeight(int[] stones)
 	{
 		int length = stones.length;
 		if (length == 0)
@@ -347,5 +335,39 @@ class Solution
 			}
 			return stones[length - 1];
 		}
+	}
+}
+
+/* Contiguous Array */
+// Optimized brute search, not good
+class Solution
+{
+	public int findMaxLength(int[] nums)
+	{
+		int t = 0;
+		for (int n : nums)
+		{
+			t += n;
+		}
+		int length = Math.min(t, nums.length - t) * 2;
+		while (length > 1)
+		{
+			int p = 0, q = length - 1, tmp = 0;
+			for(int i = p; i < q; i++)
+			{
+				tmp += nums[i];
+			}
+			while (q < nums.length)
+			{
+				tmp += nums[q];
+				if (length == tmp * 2)
+					return length;
+				tmp -= nums[p];
+				p++;
+				q++;
+			}
+			length -= 2;
+		}
+		return 0;
 	}
 }
