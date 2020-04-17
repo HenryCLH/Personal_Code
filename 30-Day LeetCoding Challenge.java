@@ -395,3 +395,33 @@ class Solution
 		return s.substring(index, index + length);
 	}
 }
+
+/*************
+	Week 3
+*************/
+
+/* Product of Array Except Self */
+// The output[i] can be product of two parts,
+// the product of the left numbers and
+// the product of the roght numbers,
+// so scan two times
+class Solution
+{
+	public int[] productExceptSelf(int[] nums)
+	{
+		int[] output = new int[nums.length];
+		int tmp = 1;
+		for (int i = 0; i < nums.length; i++)
+		{
+			output[i] = tmp;
+			tmp *= nums[i];
+		}
+		tmp = 1;
+		for (int i = nums.length - 1; i >= 0; i--)
+		{
+			output[i] *= tmp;
+			tmp *= nums[i];
+		}
+		return output;
+	}
+}
