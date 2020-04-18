@@ -482,3 +482,54 @@ class Solution
 		}
 	}
 }
+
+/* Number of Islands */
+// When meet a island, find all its land and mark it as water
+class Solution
+{
+	public int numIslands(char[][] grid)
+	{
+		if (grid.length == 0)
+			return 0;
+		int count = 0, h = grid.length, v = grid[0].length;
+		for (int i = 0; i < h; i++)
+		{
+			for (int j = 0; j < v; j++)
+			{
+				if (grid[i][j] == '1')
+				{
+					count++;
+					grid[i][j] = '0';
+					ArrayList<Integer[]> l = new ArrayList<Integer[]>();
+					l.add(new Integer[] { i, j });
+					while (!l.isEmpty())
+					{
+						Integer[] ii = l.remove(0);
+						int p = ii[0], q = ii[1];
+						if ((p - 1 >= 0) && (grid[p - 1][q] == '1'))
+						{
+							grid[p - 1][q] = '0';
+							l.add(new Integer[] { p - 1, q });
+						}
+						if ((q - 1 >= 0) && (grid[p][q - 1] == '1'))
+						{
+							grid[p][q - 1] = '0';
+							l.add(new Integer[] { p, q - 1 });
+						}
+						if ((p + 1 < h) && (grid[p + 1][q] == '1'))
+						{
+							grid[p + 1][q] = '0';
+							l.add(new Integer[] { p + 1, q });
+						}
+						if ((q + 1 < v) && (grid[p][q + 1] == '1'))
+						{
+							grid[p][q + 1] = '0';
+							l.add(new Integer[] { p, q + 1 });
+						}
+					}
+				}
+			}
+		}
+		return count;
+	}
+}
