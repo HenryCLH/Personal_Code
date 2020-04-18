@@ -425,3 +425,60 @@ class Solution
 		return output;
 	}
 }
+
+/* Valid Parenthesis String */
+// Check if the string is valid from the first char,
+// and every time add one char then check again
+class Solution
+{
+	public boolean checkValidString(String s)
+	{
+		if (s.length() == 0)
+			return true;
+		else if (s.length() == 1)
+		{
+			if (s.charAt(0) == '*')
+				return true;
+			else
+				return false;
+		}
+		else
+		{
+			int leftStar = 0, rightStar = 0, countLeft = 0;
+			for (int i = 0; i < s.length(); i++)
+			{
+				char ch = s.charAt(i);
+				if (ch == '(')
+					countLeft++;
+				else if (ch == '*')
+				{
+					if (countLeft > 0)
+					{
+						countLeft--;
+						leftStar++;
+					}
+					else
+						rightStar++;
+				}
+				else
+				{
+					if (countLeft > 0)
+						countLeft--;
+					else if (leftStar > 0)
+					{
+						leftStar--;
+						rightStar++;
+					}
+					else if (rightStar > 0)
+						rightStar--;
+					else
+						return false;
+				}
+			}
+			if (countLeft > 0)
+				return false;
+			else
+				return true;
+		}
+	}
+}
